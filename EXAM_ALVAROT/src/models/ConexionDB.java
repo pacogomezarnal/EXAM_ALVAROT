@@ -13,7 +13,7 @@ public class ConexionDB {
 	private static final String HOST="localhost";
 	private static final String BBDD="thelaby";
 	private static final String USER="root";
-	private static final String PASS="";
+	private static final String PASS="tonphp";
 	
 	//DATOS DE LA BBDD
 	private String host;
@@ -36,10 +36,16 @@ public class ConexionDB {
 		this.url="jdbc:mysql://"+this.host+"/"+this.bbdd;
 	}
 	
+	
+	/*
+	 * 	EL PROBLEMA DE LA CONEXION ERA QUE LA INSTANCIA DEBIA CREAR LA CONEXION Y SOLO HACIA QUE DEVOLVERNOS NULL
+	 * 	ENTONCES SI YA ES IGUAL A NULL ES CUANDO LA CREAMOS Y SI NO NO
+	 */
+	
 	//Implementar SingleTon
 	public static ConexionDB getInstance(String HOST,String BBDD,String USER,String PASS) {
 	      if(instance == null) {
-	         instance = null;
+	         instance = new ConexionDB(HOST,BBDD,USER,PASS);
 	      }
 	      return instance;
 	   }
@@ -48,7 +54,7 @@ public class ConexionDB {
 	//valores por defecto
 	public static ConexionDB getInstance() {
 	      if(instance == null) {
-	         instance = null;
+	         instance = new ConexionDB(HOST,BBDD,USER,PASS);
 	      }
 	      return instance;
 	  }
